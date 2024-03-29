@@ -1,0 +1,20 @@
+{% extends 'layouts/base_background.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+    <h1>User Detail</h1>
+    <p>Name: {{ object.name }}</p>
+    <p>Age: {{ object.age }}</p>
+    <p>Weight: {{ object.weight }}</p>
+    <p>Height: {{ object.height }}</p>
+    <p>Illness: {{ object.illness }}</p>
+    <p>Intolerance: {{ object.intolerance }}</p>
+    <p>Goal: {{ object.goal }}</p>
+    <p>Diet: {{ object.diet }}</p>
+    <p>Gender: {{ object.gender }}</p>
+    <p>BMI: {{ object.bmi }}</p>
+
+{% endblock javascript %}

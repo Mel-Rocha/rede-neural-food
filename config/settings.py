@@ -25,13 +25,14 @@ BASE_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
-    'theme_material_kit',
-    "home",
+    "theme_material_kit",
+    "apps.home",
+    "django_extensions",
 
 ]
 
 PROJECT_APPS = [
-    "apps.user"
+    "apps.profile_"
 
 
 ]
@@ -40,6 +41,7 @@ INSTALLED_APPS = BASE_APPS + THIRD_PARTY_APPS + PROJECT_APPS
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -50,7 +52,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "config.urls"
 
-HOME_TEMPLATES = os.path.join(BASE_DIR, 'home', 'templates')
+HOME_TEMPLATES = os.path.join(BASE_DIR, 'apps/home', 'templates')
 
 TEMPLATES = [
     {
@@ -125,7 +127,23 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'DEBUG',
+    },
+}
+
+
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-LOGIN_REDIRECT_URL = '/presentation'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+LOGIN_REDIRECT_URL = '/presentation'

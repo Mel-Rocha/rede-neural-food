@@ -9,7 +9,7 @@ urlpatterns = [
     path('contact-us/', views.contact_us, name='contact-us'),
     path('about-us/', views.about_us, name='about-us'),
     path('author/', views.author, name='author'),
-    #path('profile/<int:pk>/details/', views.profile_details, name='profile_details'),
+
     # Authentication
     path('accounts/login/', views.UserLoginView.as_view(), name='login'),
     path('accounts/logout/', views.user_logout_view, name='logout'),

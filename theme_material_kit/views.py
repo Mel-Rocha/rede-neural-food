@@ -4,33 +4,29 @@ from django.contrib.auth import logout
 
 from django.contrib.auth import views as auth_views
 
-from django.contrib import messages
-
 # Create your views here.
 
 
 # Authentication
 def registration(request):
-    if request.method == 'POST':
-        form = RegistrationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Sua conta foi criada com sucesso. Complete seu perfil antes de continuar.')
-            return redirect('profile_:profile_create')
-        else:
-            messages.error(request, 'Falha no registro. Verifique os dados fornecidos.')
+  if request.method == 'POST':
+    form = RegistrationForm(request.POST)
+    if form.is_valid():
+      form.save()
+      print('Account created successfully!')
+      return redirect('/accounts/login/')
     else:
-        form = RegistrationForm()
-    
-    context = {'form': form}
-    return render(request, 'accounts/sign-up.html', context)
-
-
+      print("Registration failed!")
+  else:
+    form = RegistrationForm()
+  
+  context = {'form': form}
+  return render(request, 'accounts/sign-up.html', context)
 
 class UserLoginView(auth_views.LoginView):
   template_name = 'accounts/sign-in.html'
   form_class = LoginForm
-  success_url = '/presentation'
+  success_url = '/'
 
 class UserPasswordResetView(auth_views.PasswordResetView):
   template_name = 'accounts/password_reset.html'
@@ -54,15 +50,13 @@ def index(request):
   return render(request, 'pages/index.html')
 
 def contact_us(request):
-  return render(request, 'pages/macros.html')
+  return render(request, 'pages/contact-us.html')
 
 def about_us(request):
-  return render(request, 'pages/macros_statistics.html')
+  return render(request, 'pages/about-us.html')
 
 def author(request):
-  return render(request, 'pages/diet.html')
-
-
+  return render(request, 'pages/author.html')
 
 
 # Sections

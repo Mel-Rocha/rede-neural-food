@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirm Delete</title>
+</head>
+<body>
+    <h1>Are you sure you want to delete this user?</h1>
+    <p>Name: {{ object.name }}</p>
+    <p>Age: {{ object.age }}</p>
+    <p>Weight: {{ object.weight }}</p>
+    <p>Height: {{ object.height }}</p>
+    <p>Illness: {{ object.illness }}</p>
+    <p>Intolerance: {{ object.intolerance }}</p>
+    <p>Goal: {{ object.goal }}</p>
+    <p>Diet: {{ object.diet }}</p>
+    <p>Gender: {{ object.gender }}</p>
+    <p>BMI: {{ object.bmi }}</p>
+    <form method="post">
+        {% csrf_token %}
+        <input type="submit" value="Confirm">
+    </form>
+    <a href="{% url 'user_detail' object.id %}">Cancel</a>
+</body>
+</html>

@@ -28,7 +28,7 @@
             <div class="card">
                 <div class="card-header">
                     <h5 class="title">
-                        {% trans "Something's wrong with your database installation. Make sure the appropriate database tables have been created, and make sure the database is readable by the appropriate user." %}
+                        {% trans "Something's wrong with your database installation. Make sure the appropriate database tables have been created, and make sure the database is readable by the appropriate profile_." %}
                     </h5>
                 </div>
                 <div class="card-body">
@@ -49,6 +49,6 @@
 
 {% block extrascript %}
     <script type="application/javascript">
-        notification.info("{% trans "Something's wrong with your database installation. Make sure the appropriate database tables have been created, and make sure the database is readable by the appropriate user." %}", 'top', 'right');
+        notification.info("{% trans "Something's wrong with your database installation. Make sure the appropriate database tables have been created, and make sure the database is readable by the appropriate profile_." %}", 'top', 'right');
     </script>
 {% endblock %}

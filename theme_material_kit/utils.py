@@ -79,7 +79,7 @@ def get_app_list(context, order=True):
         if has_module_perms:
             perms = model_admin.get_model_perms(request)
 
-            # Check whether user has any perm for this module.
+            # Check whether profile_ has any perm for this module.
             # If so, add the module to the model_list.
             if True in perms.values():
                 info = (app_label, model._meta.model_name)
@@ -258,8 +258,8 @@ def get_possible_language_codes():
 
 
 def get_original_menu_items(context):
-    if context.get('user') and user_is_authenticated(context['user']):
-        # pinned_apps = PinnedApplication.objects.filter(user=context['user'].pk).values_list('app_label', flat=True)
+    if context.get('profile_') and user_is_authenticated(context['profile_']):
+        # pinned_apps = PinnedApplication.objects.filter(profile_=context['profile_'].pk).values_list('app_label', flat=True)
         pinned_apps = []
     else:
         pinned_apps = []
@@ -305,7 +305,7 @@ def get_menu_item_url(url, original_app_list):
 
 
 def get_menu_items(context):
-    # pinned_apps = PinnedApplication.objects.filter(user=context['user'].pk).values_list('app_label', flat=True)
+    # pinned_apps = PinnedApplication.objects.filter(profile_=context['profile_'].pk).values_list('app_label', flat=True)
     pinned_apps = []
     original_app_list = OrderedDict(map(lambda app: (app['app_label'], app), get_original_menu_items(context)))
     custom_app_list = None
@@ -348,7 +348,7 @@ def get_menu_items(context):
                 item['url_blank'] = data['url_blank']
 
             if 'permissions' in data:
-                item['has_perms'] = item.get('has_perms', True) and context['user'].has_perms(data['permissions'])
+                item['has_perms'] = item.get('has_perms', True) and context['profile_'].has_perms(data['permissions'])
 
             return item
 
@@ -378,7 +378,7 @@ def get_menu_items(context):
                 item['url_blank'] = data['url_blank']
 
             if 'permissions' in data:
-                item['has_perms'] = item.get('has_perms', True) and context['user'].has_perms(data['permissions'])
+                item['has_perms'] = item.get('has_perms', True) and context['profile_'].has_perms(data['permissions'])
 
             item['pinned'] = item['app_label'] in pinned_apps
 
