@@ -1,40 +1,37 @@
 {% extends 'layouts/base_background.html' %}
-
 {% load static %}
 
 {% block content %}
     <h1>Nutrition List</h1>
-    <div id="nutrition-list"></div>
+    <div id="nutrition-list">
+        <!-- Os itens da nutrição serão preenchidos aqui -->
+    </div>
 
     <script>
-        // Função para fazer a requisição para a API e renderizar os dados na página
-        async function fetchNutritionList() {
-            const response = await fetch('/api/nutrition/', {
-                method: 'GET',
-                headers: {
-                    'Authorization': 'Bearer 9f97199ef3026cc9e31e4088c3f4a47a45ed6644a5fb2764bf94ca32edc7165f'
-                }
+        // Variável que armazena os dados da API
+        var apiResponse = {{ api_response|safe|escapejs }};
+
+        // Função para construir elementos HTML com base nos dados da API
+        function buildNutritionList(data) {
+            var nutritionList = document.getElementById('nutrition-list');
+
+            // Cria uma lista não ordenada
+            var ul = document.createElement('ul');
+
+            // Itera sobre os itens da API e cria um elemento de lista para cada um
+            data.results.forEach(function(item) {
+                var li = document.createElement('li');
+                li.textContent = item.nome + ' - ' + item.valor;
+
+                // Adiciona o elemento de lista à lista não ordenada
+                ul.appendChild(li);
             });
-            const data = await response.json();
 
-            // Verificar se a requisição foi bem-sucedida
-            if (response.ok) {
-                // Limpar a lista antes de renderizar os novos dados
-                document.getElementById('nutrition-list').innerHTML = '';
-
-                // Renderizar os dados na página
-                data.results.forEach(item => {
-                    const listItem = document.createElement('div');
-                    listItem.textContent = `Name: ${item.name}, Calories: ${item.calories}`;
-                    document.getElementById('nutrition-list').appendChild(listItem);
-                });
-            } else {
-                // Exibir mensagem de erro se a requisição falhar
-                document.getElementById('nutrition-list').textContent = 'Falha ao recuperar os dados.';
-            }
+            // Adiciona a lista não ordenada ao elemento de contêiner na página HTML
+            nutritionList.appendChild(ul);
         }
 
-        // Chamar a função para buscar a lista de nutrição ao carregar a página
-        window.onload = fetchNutritionList;
+        // Chama a função para construir a lista de nutrição com base nos dados da API
+        buildNutritionList(apiResponse);
     </script>
 {% endblock %}

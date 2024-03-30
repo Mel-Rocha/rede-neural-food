@@ -1,23 +1,53 @@
 {% extends 'layouts/base_background.html' %}
-
 {% load static %}
 
 {% block content %}
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50vh; /* Isso centraliza verticalmente */
+        }
 
+        .user-detail {
+            border: 2px solid #ccc;
+            padding: 20px;
+        }
 
-    <h1>User Detail</h1>
-    <p>Name: {{ object.name }}</p>
-    <p>Age: {{ object.age }}</p>
-    <p>Weight: {{ object.weight }}</p>
-    <p>Height: {{ object.height }}</p>
-    <p>Illness: {{ object.illness }}</p>
-    <p>Intolerance: {{ object.intolerance }}</p>
-    <p>Goal: {{ object.goal }}</p>
-    <p>Diet: {{ object.diet }}</p>
-    <p>Gender: {{ object.gender }}</p>
-    <p>BMI: {{ object.bmi }}</p>
+        .user-info {
+            margin-bottom: 20px;
+        }
 
-    <a href="{% url 'profile_edit' pk=object.pk %}" class="btn btn-primary">Edit</a>
-    <a href="{% url 'profile_delete' pk=object.pk %}" class="btn btn-danger">Delete</a>
+        .buttons {
+            text-align: center;
+        }
 
+        .btn {
+            margin-right: 10px;
+        }
+    </style>
+
+    <div class="container">
+        <div class="user-detail">
+            <h1>User Detail</h1>
+            <div class="user-info">
+                <p>Name: {{ object.name }}</p>
+                <p>Age: {{ object.age }}</p>
+                <p>Weight: {{ object.weight }}</p>
+                <p>Height: {{ object.height }}</p>
+                <p>Illness: {{ object.illness }}</p>
+                <p>Intolerance: {{ object.intolerance }}</p>
+                <p>Goal: {{ object.goal }}</p>
+                <p>Diet: {{ object.diet }}</p>
+                <p>Gender: {{ object.gender }}</p>
+                <p>BMI: {{ object.bmi }}</p>
+            </div>
+
+            <div class="buttons">
+                <a href="{% url 'profile_edit' pk=object.pk %}" class="btn btn-primary">Edit</a>
+                <a href="{% url 'profile_delete' pk=object.pk %}" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+    </div>
 {% endblock %}
