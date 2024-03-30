@@ -32,7 +32,8 @@ THIRD_PARTY_APPS = [
 ]
 
 PROJECT_APPS = [
-    "apps.profile_"
+    "apps.profile_",
+    "apps.nutrition_api",
 
 
 ]
@@ -147,3 +148,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 LOGIN_REDIRECT_URL = '/presentation'
+
+API_ENDPOINT= config('API_ENDPOINT')
+API_TOKEN= config('API_TOKEN')
