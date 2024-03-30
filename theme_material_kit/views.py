@@ -56,7 +56,7 @@ def about_us(request):
   return render(request, 'pages/about-us.html')
 
 def author(request):
-  return render(request, 'pages/author.html')
+  return render(request, 'profile/profile_detail.html')
 
 
 # Sections
