@@ -1,0 +1,40 @@
+{% extends 'layouts/base_background.html' %}
+
+{% load static %}
+
+{% block content %}
+    <h1>Nutrition List</h1>
+    <div id="nutrition-list"></div>
+
+    <script>
+        // Função para fazer a requisição para a API e renderizar os dados na página
+        async function fetchNutritionList() {
+            const response = await fetch('/api/nutrition/', {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer 9f97199ef3026cc9e31e4088c3f4a47a45ed6644a5fb2764bf94ca32edc7165f'
+                }
+            });
+            const data = await response.json();
+
+            // Verificar se a requisição foi bem-sucedida
+            if (response.ok) {
+                // Limpar a lista antes de renderizar os novos dados
+                document.getElementById('nutrition-list').innerHTML = '';
+
+                // Renderizar os dados na página
+                data.results.forEach(item => {
+                    const listItem = document.createElement('div');
+                    listItem.textContent = `Name: ${item.name}, Calories: ${item.calories}`;
+                    document.getElementById('nutrition-list').appendChild(listItem);
+                });
+            } else {
+                // Exibir mensagem de erro se a requisição falhar
+                document.getElementById('nutrition-list').textContent = 'Falha ao recuperar os dados.';
+            }
+        }
+
+        // Chamar a função para buscar a lista de nutrição ao carregar a página
+        window.onload = fetchNutritionList;
+    </script>
+{% endblock %}

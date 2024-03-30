@@ -77,7 +77,11 @@
                    {% if request.user.is_authenticated and request.user.profile %}
                       <div class="button-group">
                         <a href="{% url 'profile_detail' pk=request.user.profile.pk %}" class="dropdown-item border-radius-md">
-                            <span>Meu Perfil</span>
+                            <span>My Profile</span>
+                        </a>
+                       <div class="button-group">
+                        <a href="{% url 'nutrition_menu'  %}" class="dropdown-item border-radius-md">
+                            <span>Nutrition</span>
                         </a>
                        {% else %}
                         <h6 class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-1 mt-3">

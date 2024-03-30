@@ -1,9 +1,17 @@
 import requests
+from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from django.http import JsonResponse
 
 from config.settings import API_ENDPOINT, API_TOKEN
+
+
+def nutrition_menu(request):
+    return render(request, 'nutrition_api/nutrition.html')
+
+def upload_form(request):
+    return render(request, 'nutrition_api/upload_form.html')
 
 
 class ExcelUpload(APIView):
