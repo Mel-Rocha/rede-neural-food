@@ -44,3 +44,44 @@ class ExcelUpload(APIView):
                 "message": "Erro no upload do arquivo.",
                 "api_response": api_response
             }, status=400)
+
+
+class NutritionList(APIView):
+    """
+     Chama o endpoint da api para fazer a listagem páginada
+     de Nutrition.
+
+     Obrigatório fornecer:
+
+     @access_token: string (Bearer Token) (fornecer em header)
+
+     Opcional fornecer:
+
+     parâmetros: ?page=1&size=10
+     """
+
+    # permission_classes = (IsAuthenticated,)
+
+    @staticmethod
+    def get(request):
+        page = request.query_params.get('page', 1)
+        size = request.query_params.get('size', 10)
+
+        url = f"{API_ENDPOINT}/nutrition/?page={page}&size={size}"
+        headers = {
+            "Authorization": f"Bearer {API_TOKEN}"
+        }
+        response = requests.get(url, headers=headers)
+
+        api_response = response.json()
+
+        if response.status_code == 200:
+            return JsonResponse({
+                "message": "Dados recuperados com sucesso!",
+                "api_response": api_response
+            }, status=200)
+        else:
+            return JsonResponse({
+                "message": "Falha ao recuperar os dados",
+                "api_response": api_response
+            }, status=400)
