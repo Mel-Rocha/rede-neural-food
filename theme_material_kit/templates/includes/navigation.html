@@ -67,6 +67,10 @@
                     {% endif %}
 
                   {% if request.user.is_authenticated and not request.user.profile %}
+                      <div class="button-group">
+                        <a href="{% url 'profile_new' %}" class="dropdown-item border-radius-md">
+                            <span>Criar Perfil</span>
+                        </a>
 
                   {% endif %}
 
