@@ -17,4 +17,7 @@
     <p>Gender: {{ object.gender }}</p>
     <p>BMI: {{ object.bmi }}</p>
 
+    <a href="{% url 'profile_edit' pk=object.pk %}" class="btn btn-primary">Edit</a>
+    <a href="{% url 'profile_delete' pk=object.pk %}" class="btn btn-danger">Delete</a>
+
 {% endblock %}
