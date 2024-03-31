@@ -23,7 +23,7 @@ class ExcelUpload(APIView):
      @File: Multipart/FormData {"file": arquivo.xlsx} (fornecer em body)
      @access_token: string (Bearer Token) (fornecer em header)
      """
-    #permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated,)
 
     @staticmethod
     def post(request):
@@ -68,7 +68,7 @@ class NutritionList(APIView):
      parâmetros: ?page=1&size=10
      """
 
-    # permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated,)
 
     @staticmethod
     def get(request):
